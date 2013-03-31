@@ -1,0 +1,113 @@
+Employ
+======
+
+### Identification
+
+```
+Title:  Employ
+Desc:   Simple basic employee database system
+
+Class:  SMTI06
+NPM:    54411850
+Name:   M Haidar Hanif
+
+ID:     Task Four
+Create: Object-oriented application with SQL-based database
+Book:   Java™ How to Program, Seventh Edition
+Page:   522 [549]
+Task:   10.11-10.12 => Improvement
+Due:    4 April 2013
+```
+
+### Objectives
+
+- GUI application
+- SQL-based application
+- Employee database
+
+### Project Structure
+
+```
+employ
+├── src
+├── out
+├── .idea
+├── .git
+├── README.mkd
+├── LICENSE
+├── Employ.iml
+└── .gitignore
+```
+
+*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+
+Learning Step
+-------------
+
+1. Object-Oriented Programming
+2. Java Programming Language
+3. Inheritance
+4. Polymorphism
+5. Class Variety
+6. GUI Application
+7. SQL Database with JDBC
+
+*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+
+Employee Database System
+------------------------
+
+### Element
+
+```
+SSN = Social Security Number = 8 digits
+First Name    = 20 chars
+Last Name     = 20 chars
+Full Name     = 40 chars
+Employee Type = 16 chars
+```
+
+### Table
+
+| No | SSN        | Full Name    | Employee Type   |
+|:--:|:----------:|:------------ |:--------------- |
+| 1  | 111-11-111 | First Last   | Salaried        |
+| 2  | 222-22-222 | One Second   | Hourly          |
+| 3  | 333-33-333 | Begin End    | Commission      |
+| 4  | 444-44-444 | Start Finish | Base+Commission |
+| 4  | 555-55-555 | Land Sky     | Piece Worker    |
+
+### Menu
+
+```
+Manage
+├── Add
+│   ├── SSN
+│   ├── First Name
+│   ├── Last Name
+│   └── Employee Type
+├── Edit
+│   ├── SSN
+│   ├── First Name
+│   ├── Last Name
+│   └── Employee Type
+└── Delete
+    └── SSN
+
+Display
+├── All
+├── Sorted
+│   ├── Name
+│   └── Employee Type
+└── By SSN
+```
+
+*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+
+License
+-------
+
+Source code released under [MIT License](LICENSE) and available in [GitHub repository](https://github.com/mhaidarh/employ).
+
+Graphics released under [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-nc-sa/3.0).
+
