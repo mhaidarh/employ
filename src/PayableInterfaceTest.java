@@ -1,9 +1,7 @@
 /**
- * SMTI06, M Haidar Hanif, 54411850
- * Task Three
+ * Part of Employ
  */
 
-// Fig. 10.15: PayableInterfaceTest.java
 // Tests interface Payable.
 
 public class PayableInterfaceTest {

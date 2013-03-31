@@ -1,9 +1,7 @@
 /**
- * SMTI06, M Haidar Hanif, 54411850
- * Task Three
+ * Part of Employ
  */
 
-// Fig. 10.6:HourlyEmployee.java
 // HourlyEmployee class extends Employee.
 
 public class HourlyEmployee extends Employee {

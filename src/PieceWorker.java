@@ -1,9 +1,7 @@
 /**
- * SMTI06, M Haidar Hanif, 54411850
- * Task Three
+ * Part of Employ
  */
 
-// Fig. 10.x: PieceWorker.java
 // PieceWorker class extends Employee.
 // for Payroll System Modification
 

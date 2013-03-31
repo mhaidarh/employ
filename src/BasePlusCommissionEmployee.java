@@ -1,9 +1,7 @@
 /**
- * SMTI06, M Haidar Hanif, 54411850
- * Task Three
+ * Part of Employ
  */
 
-// Fig. 10.8: BasePlusCommissionEmployee.java
 // BasePlusCommissionEmployee class extends CommissionEmployee.
 // This class also has already extends the new version of class CommissionEmployee
 

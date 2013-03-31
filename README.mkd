@@ -50,6 +50,14 @@ Learning Step
 4. Polymorphism
 5. Class Variety
 6. GUI Application
+   - Event-Driven Programming
+   - GUI Parts
+     - Graphical Components
+     - Listener Methods
+     - Application Methods
+   - GUI with Swing and AWT
+   - Containers
+   - Swing class hierarchy
 7. SQL Database with JDBC
 
 *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
