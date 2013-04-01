@@ -5,11 +5,11 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class CommonFrame extends JFrame {
+public abstract class CommonFrame extends JFrame {
 
   JPanel commonPanel;
 
-  // define common for all frame
+  // define common settings for all frame
   public CommonFrame(String section) {
     super("Employ");
 
