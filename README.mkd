@@ -33,9 +33,9 @@ employ
 ├── out
 ├── .idea
 ├── .git
+├── employ.iml
 ├── README.mkd
 ├── LICENSE
-├── Employ.iml
 └── .gitignore
 ```
 
@@ -57,8 +57,11 @@ Learning Step
      - Application Methods
    - GUI with Swing and AWT
    - Containers
-   - Swing class hierarchy
+   - Swing Class Hierarchy
+   - GUI Builder and Layout Manager
 7. SQL Database with JDBC
+   - MySQL JDBC Driver
+   - SQLite ODBC Driver
 
 *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
 
