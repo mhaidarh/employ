@@ -7,18 +7,23 @@ import javax.swing.*;
 
 public abstract class CommonFrame extends JFrame {
 
-  JPanel commonPanel;
+  JPanel panelHeading;
+  JLabel labelHeading;
 
   // define common settings for all frame
-  public CommonFrame(String section) {
-    super("Employ");
+  public CommonFrame(String heading) {
+    super("Employ - " + heading);
 
     setSize(400, 200);
+    setResizable(false);
     setLocationRelativeTo(null);
     setLayout(new FlowLayout());
 
-    JLabel sectionLabel = new JLabel(section);
-    add(sectionLabel);
+    panelHeading = new JPanel();
+    labelHeading = new JLabel(heading);
+
+    add(panelHeading);
+    add(labelHeading);
 
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   }

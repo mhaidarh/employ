@@ -9,19 +9,27 @@ import javax.swing.*;
 
 public class DashboardFrame extends CommonFrame implements ActionListener {
 
+  JPanel panelFieldInput = new JPanel();
+  JPanel panelFieldOutput = new JPanel();
+  JPanel panelButton = new JPanel();
+
+  JLabel labelNumberInput = new JLabel("Number Input: ");
+  JTextField textNumberInput = new JTextField(20);
+  JLabel labelNumberOutput = new JLabel("Number Output: ");
+  JTextField textNumberOutput = new JTextField(20);
+
   JButton buttonAddData = new JButton("Add");
   JButton buttonDeleteData = new JButton("Delete");
   JButton buttonClearData = new JButton("Clear");
-  JTextField textNumberInput = new JTextField(30);
-  JTextField textNumberOutput = new JTextField(30);
 
   double numberInput = 0;
-  String warnInputNumber = "Type number (dot-decimal notation)";
+  String warnInputNumber = "Type number (dot-decimal)";
 
   // define dashboard for special frame
   public DashboardFrame() {
     super("Dashboard");
 
+    // define event action listener
     buttonAddData.setActionCommand("addData");
     buttonDeleteData.setActionCommand("deleteData");
     buttonClearData.setActionCommand("clearData");
@@ -31,11 +39,19 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     buttonClearData.addActionListener(this);
     textNumberOutput.setEditable(false);
 
-    add(buttonAddData);
-    add(buttonDeleteData);
-    add(buttonClearData);
-    add(textNumberInput);
-    add(textNumberOutput);
+    // put component on panel on frame
+    panelFieldInput.add(labelNumberInput);
+    panelFieldInput.add(textNumberInput);
+    panelFieldOutput.add(labelNumberOutput);
+    panelFieldOutput.add(textNumberOutput);
+
+    panelButton.add(buttonAddData);
+    panelButton.add(buttonDeleteData);
+    panelButton.add(buttonClearData);
+
+    add(panelFieldInput);
+    add(panelFieldOutput);
+    add(panelButton);
   }
 
   // get number input in text input
