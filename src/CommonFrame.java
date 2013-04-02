@@ -13,7 +13,7 @@ public abstract class CommonFrame extends JFrame {
   public CommonFrame(String section) {
     super("Employ");
 
-    setSize(500, 300);
+    setSize(400, 200);
     setLocationRelativeTo(null);
     setLayout(new FlowLayout());
 
