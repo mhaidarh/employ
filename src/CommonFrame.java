@@ -2,23 +2,24 @@
  * Part of Employ
  */
 
-import java.awt.*;
 import javax.swing.*;
 
 public abstract class CommonFrame extends JFrame {
 
-  JPanel commonPanel;
+  JPanel panelHeading = new JPanel();
 
   // define common settings for all frame
-  public CommonFrame(String section) {
-    super("Employ");
+  public CommonFrame(String heading) {
+    super("Employ - " + heading);
 
-    setSize(500, 300);
+    setSize(400, 200);
+    setResizable(false);
     setLocationRelativeTo(null);
-    setLayout(new FlowLayout());
+    setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
-    JLabel sectionLabel = new JLabel(section);
-    add(sectionLabel);
+    JLabel labelHeading = new JLabel(heading);
+    panelHeading.add(labelHeading);
+    add(panelHeading);
 
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   }
