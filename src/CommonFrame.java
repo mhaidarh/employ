@@ -2,13 +2,11 @@
  * Part of Employ
  */
 
-import java.awt.*;
 import javax.swing.*;
 
 public abstract class CommonFrame extends JFrame {
 
-  JPanel panelHeading;
-  JLabel labelHeading;
+  JPanel panelHeading = new JPanel();
 
   // define common settings for all frame
   public CommonFrame(String heading) {
@@ -17,13 +15,11 @@ public abstract class CommonFrame extends JFrame {
     setSize(400, 200);
     setResizable(false);
     setLocationRelativeTo(null);
-    setLayout(new FlowLayout());
+    setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
-    panelHeading = new JPanel();
-    labelHeading = new JLabel(heading);
-
+    JLabel labelHeading = new JLabel(heading);
+    panelHeading.add(labelHeading);
     add(panelHeading);
-    add(labelHeading);
 
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   }
