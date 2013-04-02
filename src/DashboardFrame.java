@@ -2,17 +2,20 @@
  * Part of Employ
  */
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 public class DashboardFrame extends CommonFrame implements ActionListener {
 
-  JButton buttonAddData       = new JButton("Add");
-  JButton buttonDeleteData    = new JButton("Delete");
-  JButton buttonClearData     = new JButton("Clear");
-  JTextField textInputNumber  = new JTextField(20);
-  JTextField textOutputNumber = new JTextField(20);
+  JButton buttonAddData = new JButton("Add");
+  JButton buttonDeleteData = new JButton("Delete");
+  JButton buttonClearData = new JButton("Clear");
+  JTextField textNumberInput = new JTextField(20);
+  JTextField textNumberOutput = new JTextField(20);
+
+  int numberInput;
 
   // define dashboard for special frame
   public DashboardFrame() {
@@ -25,52 +28,58 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     buttonAddData.addActionListener(this);
     buttonDeleteData.addActionListener(this);
     buttonClearData.addActionListener(this);
-    textInputNumber.addActionListener(this);
-    textOutputNumber.setEditable(false);
+    textNumberOutput.setEditable(false);
 
     add(buttonAddData);
     add(buttonDeleteData);
     add(buttonClearData);
-    add(textInputNumber);
-    add(textOutputNumber);
+    add(textNumberInput);
+    add(textNumberOutput);
   }
 
   // get number input in text input
+  // also define exception if input is not number
   void getNumberInput() {
-    String inputNumber = textInputNumber.getText();
-    textOutputNumber.setText(inputNumber);
+    String numberInputString = textNumberInput.getText();
+    try {
+      numberInput = Integer.parseInt(numberInputString);
+      textNumberOutput.setText(numberInput + "");
+    } catch (Exception ex) {
+      textNumberOutput.setText("Type number!");
+    }
   }
 
   // clear number output in text output
   void clearNumberOutput() {
-    textOutputNumber.setText("");
+    textNumberOutput.setText("");
   }
 
   // clear number input & output in text input & output
-  void  clearNumberInputOutput() {
-    textInputNumber.setText("");
-    textOutputNumber.setText("");
+  void clearNumberInputOutput() {
+    textNumberInput.setText("");
+    textNumberOutput.setText("");
   }
 
   // give warning message in text output if number input is empty
-  void  warnInputNumber() {
-    textOutputNumber.setText("Type input text!");
+  void warnInputNumber() {
+    textNumberOutput.setText("Type number!");
   }
 
   // define listener action when button is clicked
   public void actionPerformed(ActionEvent event) {
     if (event.getActionCommand().equals("addData")) {
-      if (textInputNumber.getText().equals(""))
+      if (textNumberInput.getText().equals("")) {
         warnInputNumber();
-      else
+      } else {
         getNumberInput();
-    }
-    else if (event.getActionCommand().equals("deleteData"))
+      }
+    } else if (event.getActionCommand().equals("deleteData")) {
       clearNumberOutput();
-    else  if (event.getActionCommand().equals("clearData"))
+    } else if (event.getActionCommand().equals("clearData")) {
       clearNumberInputOutput();
-    else
-      getContentPane().setBackground(Color.white);
+    } else {
+      textNumberOutput.setText("Use the button!");
+    }
 
     repaint();
   }
