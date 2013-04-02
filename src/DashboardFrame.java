@@ -12,10 +12,11 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JButton buttonAddData = new JButton("Add");
   JButton buttonDeleteData = new JButton("Delete");
   JButton buttonClearData = new JButton("Clear");
-  JTextField textNumberInput = new JTextField(20);
-  JTextField textNumberOutput = new JTextField(20);
+  JTextField textNumberInput = new JTextField(30);
+  JTextField textNumberOutput = new JTextField(30);
 
-  int numberInput;
+  double numberInput = 0;
+  String warnInputNumber = "Type number (dot-decimal notation)";
 
   // define dashboard for special frame
   public DashboardFrame() {
@@ -42,10 +43,10 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   void getNumberInput() {
     String numberInputString = textNumberInput.getText();
     try {
-      numberInput = Integer.parseInt(numberInputString);
+      numberInput = Double.parseDouble(numberInputString);
       textNumberOutput.setText(numberInput + "");
     } catch (Exception ex) {
-      textNumberOutput.setText("Type number!");
+      textNumberOutput.setText(warnInputNumber);
     }
   }
 
@@ -62,7 +63,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
 
   // give warning message in text output if number input is empty
   void warnInputNumber() {
-    textNumberOutput.setText("Type number!");
+    textNumberOutput.setText(warnInputNumber);
   }
 
   // define listener action when button is clicked
