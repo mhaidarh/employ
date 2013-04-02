@@ -10,8 +10,8 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
 
   JButton buttonAddData = new JButton("Add");
   JButton buttonDeleteData = new JButton("Delete");
-  JTextField textNumber = new JTextField(10);
-  JTextField textOutput = new JTextField(10);
+  JTextField textInputNumber = new JTextField(10);
+  JTextField textOutputNumber = new JTextField(10);
 
   // define dashboard for special frame
   public DashboardFrame() {
@@ -22,25 +22,34 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
 
     buttonAddData.addActionListener(this);
     buttonDeleteData.addActionListener(this);
-    textNumber.addActionListener(this);
+    textInputNumber.addActionListener(this);
+    textOutputNumber.setEditable(false);
 
     add(buttonAddData);
     add(buttonDeleteData);
-    add(textNumber);
-    add(textOutput);
+    add(textInputNumber);
+    add(textOutputNumber);
   }
 
-  // define listener action when button "Add" is clicked
-  public void actionPerformed(ActionEvent event) {
-    String inputNumber = textNumber.getText();
-    textOutput.setText(inputNumber);
+  // get input number in text input
+  void getTextInput() {
+    String inputNumber = textInputNumber.getText();
+    textOutputNumber.setText(inputNumber);
+  }
 
+  // clear input number in text input
+  void clearInputNumber() {
+    textOutputNumber.setText("");
+  }
+
+  // define listener action when button is clicked
+  public void actionPerformed(ActionEvent event) {
     if (event.getActionCommand().equals("addData"))
-      getContentPane().setBackground(Color.white);
+      getTextInput();
     else if (event.getActionCommand().equals("deleteData"))
-      getContentPane().setBackground(Color.darkGray);
+      clearInputNumber();
     else
-      getContentPane().setBackground(Color.black);
+      getContentPane().setBackground(Color.white);
 
     repaint();
   }
