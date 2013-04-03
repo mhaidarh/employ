@@ -56,9 +56,10 @@ Learning Step
      - Listener Methods
      - Application Methods
    - GUI with Swing and AWT
-   - Containers
    - Swing Class Hierarchy
-   - GUI Builder and Layout Manager
+   - Containers
+   - Components
+   - Layout Manager
 7. SQL Database with JDBC
    - MySQL JDBC Driver
    - SQLite ODBC Driver
@@ -78,6 +79,26 @@ Full Name     = 40 chars
 Employee Type = 16 chars
 ```
 
+```
+Salaried
+weeklySalary = salary <= 0 ? 0 : salary
+earnings = weeklySalary
+
+Hourly
+wage = (hourlyWage <= 0) ? 0 : hourlyWage
+hours = ((hoursWorked >= 0) && (hoursWorked <= 168)) ? hoursWorked : 0
+earnings = hours <= 40 ? wage * hours : 40 * wage + (hours - 40) * wage * 1.5
+
+Commission
+commissionRate = (rate >= 0 && rate <= 1) ? rate : 0
+grossSales = (sales <= 0) ? 0 : sales
+earnings = commissionRate * grossSales
+
+CommissionPlus
+baseSalary = (salary <= 0) ? 0 : salary
+earnings = baseSalary + Commission.earnings
+```
+
 ### Table
 
 | No | SSN        | Full Name    | Employee Type   |
@@ -85,7 +106,7 @@ Employee Type = 16 chars
 | 1  | 111-11-111 | First Last   | Salaried        |
 | 2  | 222-22-222 | One Second   | Hourly          |
 | 3  | 333-33-333 | Begin End    | Commission      |
-| 4  | 444-44-444 | Start Finish | Base+Commission |
+| 4  | 444-44-444 | Start Finish | CommissionPlus  |
 | 4  | 555-55-555 | Land Sky     | Piece Worker    |
 
 ### Menu
