@@ -17,7 +17,7 @@ public class SalariedEmployee extends Employee {
 
   // set salary
   public void setWeeklySalary(double salary) {
-    weeklySalary = salary < 0.0 ? 0.0 : salary;
+    weeklySalary = salary <= 0 ? 0 : salary;
   }
 
   // return salary

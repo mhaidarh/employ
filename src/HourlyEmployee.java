@@ -19,7 +19,7 @@ public class HourlyEmployee extends Employee {
 
   // set wage
   public void setWage(double hourlyWage) {
-    wage = (hourlyWage < 0.0) ? 0.0 : hourlyWage;
+    wage = (hourlyWage <= 0) ? 0 : hourlyWage;
   }
 
   // return wage
@@ -29,8 +29,7 @@ public class HourlyEmployee extends Employee {
 
   // set hours worked
   public void setHours(double hoursWorked) {
-    hours = ((hoursWorked >= 0.0) && (hoursWorked <= 168.0)) ?
-            hoursWorked : 0.0;
+    hours = ((hoursWorked >= 0) && (hoursWorked <= 168)) ? hoursWorked : 0;
   }
 
   // return hours worked

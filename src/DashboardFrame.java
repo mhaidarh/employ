@@ -13,6 +13,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   // panels on frame
   JPanel panelInput = new JPanel();
   JPanel panelType = new JPanel();
+  JPanel panelMore = new JPanel();
   JPanel panelButton = new JPanel();
   JPanel panelOutput = new JPanel();
 
@@ -31,11 +32,18 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JRadioButton eCommission = new JRadioButton("Commission", false);
   JRadioButton eCommissionPlus = new JRadioButton("Commission Plus", false);
 
-  JLabel labelWeeklySalary = new JLabel("Weekly Salary:");
-  JLabel labelWage = new JLabel("Wage:");
-  JLabel labelHours = new JLabel("Hours:");
-  JLabel labelCommissionRate = new JLabel("Commission Rate:");
-  JLabel labelGrossSales = new JLabel("Gross Sales:");
+  JLabel labelSalary = new JLabel("Weekly Salary ($):");
+  JTextField textSalary = new JTextField();
+  JLabel labelWage = new JLabel("Wage ($):");
+  JTextField textWage = new JTextField();
+  JLabel labelHours = new JLabel("Hours (0-168):");
+  JTextField textHours = new JTextField();
+  JLabel labelRate = new JLabel("Commission Rate (%):");
+  JTextField textRate = new JTextField();
+  JLabel labelSales = new JLabel("Gross Sales ($):");
+  JTextField textSales = new JTextField();
+  JLabel labelPieces = new JLabel("Pieces Produced (>0):");
+  JTextField textPieces = new JTextField();
 
   // output components
   JLabel labelSSNOutput = new JLabel("Registered SSN: ");
@@ -49,6 +57,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JButton buttonAddData = new JButton("Add");
   JButton buttonDeleteData = new JButton("Delete");
   JButton buttonClearData = new JButton("Clear");
+  JButton buttonDisplayData = new JButton("Display");
 
   // reuse variables
   int ssnInput;
@@ -63,11 +72,11 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     buttonAddData.setActionCommand("addData");
     buttonDeleteData.setActionCommand("deleteData");
     buttonClearData.setActionCommand("clearData");
+    buttonDisplayData.setActionCommand("displayData");
 
     buttonAddData.addActionListener(this);
     buttonDeleteData.addActionListener(this);
     buttonClearData.addActionListener(this);
-    textSSNOutput.setEditable(false);
 
     eSalaried.setActionCommand("typeSalaried");
     eHourly.setActionCommand("typeHourly");
@@ -83,20 +92,41 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     panelInput.add(textNameLast);
 
     panelType.setLayout(new BoxLayout(panelType, BoxLayout.Y_AXIS));
+    panelType.add(labelType);
     eType.add(eSalaried);
     eType.add(eHourly);
     eType.add(eCommission);
     eType.add(eCommissionPlus);
-    panelType.add(labelType);
     panelType.add(eSalaried);
     panelType.add(eHourly);
     panelType.add(eCommission);
     panelType.add(eCommissionPlus);
 
+    panelMore.setLayout(new BoxLayout(panelMore, BoxLayout.Y_AXIS));
+    panelMore.add(labelSalary);
+    panelMore.add(textSalary);
+    panelMore.add(labelWage);
+    panelMore.add(textWage);
+    panelMore.add(labelHours);
+    panelMore.add(textHours);
+    panelMore.add(labelRate);
+    panelMore.add(textRate);
+    panelMore.add(labelSales);
+    panelMore.add(textSales);
+    panelMore.add(labelPieces);
+    panelMore.add(textPieces);
+    textSalary.setEditable(false);
+    textWage.setEditable(false);
+    textHours.setEditable(false);
+    textRate.setEditable(false);
+    textSales.setEditable(false);
+    textPieces.setEditable(false);
+
     panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.X_AXIS));
     panelButton.add(buttonAddData);
     panelButton.add(buttonDeleteData);
     panelButton.add(buttonClearData);
+    panelButton.add(buttonDisplayData);
 
     panelOutput.setLayout(new BoxLayout(panelOutput, BoxLayout.Y_AXIS));
     panelOutput.add(labelSSNOutput);
@@ -105,9 +135,13 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     panelOutput.add(textNameFull);
     panelOutput.add(labelTypeOutput);
     panelOutput.add(textTypeOutput);
+    textSSNOutput.setEditable(false);
+    textNameFull.setEditable(false);
+    textTypeOutput.setEditable(false);
 
     add(panelInput);
     add(panelType);
+    add(panelMore);
     add(panelButton);
     add(panelOutput);
   }

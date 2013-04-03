@@ -19,7 +19,7 @@ public class CommissionEmployee extends Employee {
 
   // set commission rate
   public void setCommissionRate(double rate) {
-    commissionRate = (rate > 0.0 && rate < 1.0) ? rate : 0.0;
+    commissionRate = (rate > 0 && rate <= 100) ? rate : 0;
   }
 
   // return commission rate
@@ -29,7 +29,7 @@ public class CommissionEmployee extends Employee {
 
   // set gross sales amount
   public void setGrossSales(double sales) {
-    grossSales = (sales < 0.0) ? 0.0 : sales;
+    grossSales = (sales <= 0) ? 0 : sales;
   }
 
   // return gross sales amount
