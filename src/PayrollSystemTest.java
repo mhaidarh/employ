@@ -15,8 +15,8 @@ public class PayrollSystemTest {
         new HourlyEmployee("Bruce", "Banner", "222-22-2222", 200, 20);
     CommissionEmployee commissionEmployee =
         new CommissionEmployee("Clint", "Barton", "333-33-3333", 10000, .03);
-    BasePlusCommissionEmployee basePlusCommissionEmployee =
-        new BasePlusCommissionEmployee("Natasha", "Romanoff", "444-44-4444", 6000, .03, 200);
+    CommissionPlusEmployee commissionPlusEmployee =
+        new CommissionPlusEmployee("Natasha", "Romanoff", "444-44-4444", 6000, .03, 200);
     PieceWorker pieceWorker =
         new PieceWorker("Tony", "Stark", "000-000-0000", 100, 200);
 
@@ -28,8 +28,8 @@ public class PayrollSystemTest {
     System.out.printf("%s\n%s: $%,.2f\n\n",
                       commissionEmployee, "earned", commissionEmployee.earnings());
     System.out.printf("%s\n%s: $%,.2f\n\n",
-                      basePlusCommissionEmployee,
-                      "earned", basePlusCommissionEmployee.earnings());
+                      commissionPlusEmployee,
+                      "earned", commissionPlusEmployee.earnings());
     System.out.printf("%s\n%s: $%,.2f\n\n",
                       pieceWorker, "earned", pieceWorker.earnings());
 
@@ -40,7 +40,7 @@ public class PayrollSystemTest {
     employees[0] = salariedEmployee;
     employees[1] = hourlyEmployee;
     employees[2] = commissionEmployee;
-    employees[3] = basePlusCommissionEmployee;
+    employees[3] = commissionPlusEmployee;
     employees[4] = pieceWorker;
 
     System.out.println("Employees processed polymorphically:\n");
@@ -49,12 +49,12 @@ public class PayrollSystemTest {
     for (Employee currentEmployee : employees) {
       System.out.println(currentEmployee); // invokes toString
 
-      // determine whether element is a BasePlusCommissionEmployee
-      if (currentEmployee instanceof BasePlusCommissionEmployee) {
+      // determine whether element is a CommissionPlusEmployee
+      if (currentEmployee instanceof CommissionPlusEmployee) {
 
-        // downcast Employee reference to BasePlusCommissionEmployee reference
-        BasePlusCommissionEmployee employee =
-            (BasePlusCommissionEmployee) currentEmployee;
+        // downcast Employee reference to CommissionPlusEmployee reference
+        CommissionPlusEmployee employee =
+            (CommissionPlusEmployee) currentEmployee;
         double oldBaseSalary = employee.getBaseSalary();
         employee.setBaseSalary(1.10 * oldBaseSalary);
         System.out.printf(

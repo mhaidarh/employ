@@ -4,7 +4,7 @@
 
 // Employee abstract superclass.
 
-public abstract class Employee implements Payable {
+public abstract class Employee {
 
   private String firstName;
   private String lastName;
@@ -55,8 +55,5 @@ public abstract class Employee implements Payable {
 
   // abstract method overridden by subclasses
   public abstract double earnings(); // no implementation here
-
-  // Note: We do not implement Payable method getPaymentAmount here so
-  // this class must be declared abstract to avoid a compilation error.
 
 }

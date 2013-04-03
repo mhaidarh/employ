@@ -42,13 +42,6 @@ public class CommissionEmployee extends Employee {
     return getCommissionRate() * getGrossSales();
   }
 
-  // get payment amount; override abstract method getPaymentAmount in Employee
-  // this acts in the Payable hierarchy as subclass
-  // although it's basically the same with earnings
-  public double getPaymentAmount() {
-    return getCommissionRate() * getGrossSales();
-  }
-
   // return String representation of CommissionEmployee object
   public String toString() {
     return String.format("%s: %s\n%s: $%,.2f; %s: %.2f",

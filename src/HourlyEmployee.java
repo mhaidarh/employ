@@ -44,14 +44,6 @@ public class HourlyEmployee extends Employee {
                             : 40 * getWage() + (getHours() - 40) * getWage() * 1.5;
   }
 
-  // get payment amount; override abstract method getPaymentAmount in Employee
-  // this acts in the Payable hierarchy as subclass
-  // although it's basically the same with earnings
-  public double getPaymentAmount() {
-    return getHours() <= 40 ? getWage() * getHours()
-                            : 40 * getWage() + (getHours() - 40) * getWage() * 1.5;
-  }
-
   // return String representation of HourlyEmployee object
   public String toString() {
     return String.format("hourly employee: %s\n%s: $%,.2f; %s: %,.2f",

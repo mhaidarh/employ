@@ -30,13 +30,6 @@ public class SalariedEmployee extends Employee {
     return getWeeklySalary();
   }
 
-  // get payment amount; override abstract method getPaymentAmount in Employee
-  // this acts in the Payable hierarchy as subclass
-  // although it's basically the same with earnings
-  public double getPaymentAmount() {
-    return getWeeklySalary();
-  }
-
   // return String representation of SalariedEmployee object
   public String toString() {
     return String.format("salaried employee: %s\n%s: $%,.2f",
