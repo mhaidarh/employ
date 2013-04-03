@@ -14,17 +14,25 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JPanel panelButton = new JPanel();
   JPanel panelOutput = new JPanel();
 
-  JLabel labelNumberInput = new JLabel("Number Input: ");
-  JTextField textNumberInput = new JTextField(10);
+  // input components
+  JLabel labelSSNInput = new JLabel("SSN:");
+  JTextField textSSNInput = new JTextField(8);
+  JLabel labelNameFirst = new JLabel("First Name:");
+  JTextField textNameFirst = new JTextField(15);
+  JLabel labelNameLast = new JLabel("Last Name:");
+  JTextField textNameLast = new JTextField(15);
 
-  ButtonGroup employeeType = new ButtonGroup();
+  JLabel labelType = new JLabel("Employee Type:");
+  ButtonGroup eType = new ButtonGroup();
   JRadioButton eSalaried = new JRadioButton("Salaried", true);
   JRadioButton eHourly = new JRadioButton("Hourly", false);
   JRadioButton eCommission = new JRadioButton("Commission", false);
   JRadioButton eCommissionPlus = new JRadioButton("Commission Plus", false);
 
-  JLabel labelNumberOutput = new JLabel("Number Output: ");
-  JTextField textNumberOutput = new JTextField(10);
+  JLabel labelSSNOutput = new JLabel("Registered SSN: ");
+  JTextField textSSNOutput = new JTextField(10);
+  JLabel labelNameFull = new JLabel("Full Name: ");
+  JTextField textNameFull = new JTextField(31);
   JLabel labelTypeOutput = new JLabel("Employee Type: ");
   JTextField textTypeOutput = new JTextField(15);
 
@@ -32,8 +40,9 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JButton buttonDeleteData = new JButton("Delete");
   JButton buttonClearData = new JButton("Clear");
 
-  double numberInput = 0;
-  String warnInput = "Type number (dot-decimal)";
+  int ssnInput;
+  String warnSSN = "Type SSN (Social Security Number)!";
+  String warnName = "Type first name with/without last name!";
 
   // define dashboard for special frame
   public DashboardFrame() {
@@ -47,24 +56,31 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     buttonAddData.addActionListener(this);
     buttonDeleteData.addActionListener(this);
     buttonClearData.addActionListener(this);
-    textNumberOutput.setEditable(false);
+    textSSNOutput.setEditable(false);
 
     eSalaried.setActionCommand("typeSalaried");
     eHourly.setActionCommand("typeHourly");
     eCommission.setActionCommand("typeCommission");
     eCommissionPlus.setActionCommand("typeCommissionPlus");
-    employeeType.add(eSalaried);
-    employeeType.add(eHourly);
-    employeeType.add(eCommission);
-    employeeType.add(eCommissionPlus);
+    eType.add(eSalaried);
+    eType.add(eHourly);
+    eType.add(eCommission);
+    eType.add(eCommissionPlus);
+
+    panelInput.setLayout(new BoxLayout(panelInput, BoxLayout.Y_AXIS));
+    panelInput.add(labelSSNInput);
+    panelInput.add(textSSNInput);
+    panelInput.add(labelNameFirst);
+    panelInput.add(textNameFirst);
+    panelInput.add(labelNameLast);
+    panelInput.add(textNameLast);
+
     panelType.setLayout(new BoxLayout(panelType, BoxLayout.Y_AXIS));
+    panelType.add(labelType);
     panelType.add(eSalaried);
     panelType.add(eHourly);
     panelType.add(eCommission);
     panelType.add(eCommissionPlus);
-
-    panelInput.add(labelNumberInput);
-    panelInput.add(textNumberInput);
 
     panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.X_AXIS));
     panelButton.add(buttonAddData);
@@ -72,8 +88,10 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     panelButton.add(buttonClearData);
 
     panelOutput.setLayout(new BoxLayout(panelOutput, BoxLayout.Y_AXIS));
-    panelOutput.add(labelNumberOutput);
-    panelOutput.add(textNumberOutput);
+    panelOutput.add(labelSSNOutput);
+    panelOutput.add(textSSNOutput);
+    panelOutput.add(labelNameFull);
+    panelOutput.add(textNameFull);
     panelOutput.add(labelTypeOutput);
     panelOutput.add(textTypeOutput);
 
@@ -86,50 +104,66 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   // get number input in text input
   // also define exception if input is not number
   void getInputAll() {
-    String numberInputString = textNumberInput.getText();
+    String numberInputString = textSSNInput.getText();
     try {
-      numberInput = Double.parseDouble(numberInputString);
-      textNumberOutput.setText(numberInput + "");
-      textTypeOutput.setText(getSelectedButtonText(employeeType));
+      ssnInput = Integer.parseInt(numberInputString);
+      textSSNOutput.setText(ssnInput + "");
+      textNameFull.setText(textNameFirst.getText() + " " + textNameLast.getText());
+      textTypeOutput.setText(getSelectedButtonText(eType));
     } catch (Exception ex) {
-      textNumberOutput.setText(warnInput);
+      textSSNOutput.setText(warnSSN);
     }
   }
 
   // clear number output in text output
   void clearOutputAll() {
-    textNumberOutput.setText("");
+    textSSNOutput.setText("");
+    textNameFull.setText("");
     textTypeOutput.setText("");
   }
 
   // clear number input & output in text input & output
   void clearInputOutputAll() {
-    textNumberInput.setText("");
-    textNumberOutput.setText("");
+    textSSNInput.setText("");
+    textNameFirst.setText("");
+    textNameLast.setText("");
+    textSSNOutput.setText("");
+    textNameFull.setText("");
     textTypeOutput.setText("");
   }
 
-  // give warning message in text output if number input is empty
-  void warnInput() {
-    textNumberOutput.setText(warnInput);
+  // give warning message in SSN output if SSN input is empty
+  void warnSSNInput() {
+    textSSNOutput.setText(warnSSN);
+  }
+
+  // give warning message in full name output if first or last name is empty
+  void warnNameInput() {
+    textNameFull.setText(warnName);
   }
 
   // define listener action when button is clicked
   public void actionPerformed(ActionEvent event) {
     if (event.getActionCommand().equals("addData")) {
-      if (textNumberInput.getText().equals("")) {
-        warnInput();
-      } else {
-        getInputAll();
-      }
+      if (textSSNInput.getText().equals("") || (textNameFirst.getText().equals(""))) {
+          if (!textSSNInput.getText().equals("")) {
+            warnNameInput();
+          } else if (!textNameFirst.getText().equals("")) {
+            warnSSNInput();
+          } else {
+            warnSSNInput();
+            warnNameInput();
+          }
+        } else {
+          getInputAll();
+        }
     } else if (event.getActionCommand().equals("deleteData")) {
       clearOutputAll();
     } else if (event.getActionCommand().equals("clearData")) {
       clearInputOutputAll();
     } else {
-      textNumberOutput.setText("Use the button!");
+      textSSNOutput.setText("Use the button!");
     }
-
     repaint();
   }
 

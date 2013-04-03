@@ -15,7 +15,7 @@ public abstract class CommonFrame extends JFrame {
   public CommonFrame(String heading) {
     super("Employ - " + heading);
 
-    setSize(300, 400);
+    setSize(400, 600);
     setResizable(false);
     setLocationRelativeTo(null);
     setLayout(new FlowLayout());
