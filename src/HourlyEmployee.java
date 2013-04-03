@@ -40,8 +40,7 @@ public class HourlyEmployee extends Employee {
 
   // calculate earnings; override abstract method earnings in Employee
   public double earnings() {
-    return getHours() <= 40 ? getWage() * getHours()
-                            : 40 * getWage() + (getHours() - 40) * getWage() * 1.5;
+    return getHours() <= 40 ? getWage() * getHours() : 40 * getWage() + (getHours() - 40) * getWage() * 1.5;
   }
 
   // return String representation of HourlyEmployee object

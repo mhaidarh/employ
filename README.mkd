@@ -16,7 +16,7 @@ Create: Object-oriented application with SQL-based database
 Book:   Java™ How to Program, Seventh Edition
 Page:   522 [549]
 Task:   10.11-10.12 => Improvement
-Due:    4 April 2013
+Date:   April 2013
 ```
 
 ### Objectives
@@ -73,9 +73,9 @@ Employee Database System
 
 ```
 SSN = Social Security Number = 8 digits
-First Name    = 20 chars
-Last Name     = 20 chars
-Full Name     = 40 chars
+First Name    = 15 chars
+Last Name     = 15 chars
+Full Name     = 31 chars (with space)
 Employee Type = 16 chars
 ```
 
@@ -96,7 +96,12 @@ earnings = commissionRate * grossSales
 
 CommissionPlus
 baseSalary = (salary <= 0) ? 0 : salary
-earnings = baseSalary + Commission.earnings
+earnings = baseSalary + super.earnings
+
+PieceWorker
+wage = wagePerPiece <= 0 ? 0 : wagePerPiece;
+pieces = piecesProduced <= 0 ? 0 : piecesProduced;
+earnings = pieces <= 0 ? 0.0 : pieces * wage;
 ```
 
 ### Table
@@ -125,13 +130,12 @@ Manage
 │   └── Employee Type
 └── Delete
     └── SSN
-
 Display
 ├── All
-├── Sorted
-│   ├── Name
-│   └── Employee Type
-└── By SSN
+└── Sorted
+    ├── SSN
+    ├── Name
+    └── Employee Type
 ```
 
 *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *

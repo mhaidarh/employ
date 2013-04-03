@@ -22,6 +22,7 @@ public class PieceWorker extends Employee {
     pieces = piecesProduced < 0 ? 0 : piecesProduced;
   }
 
+  // return pieces
   public double getNumberOfPieces() {
     return pieces;
   }
@@ -38,10 +39,7 @@ public class PieceWorker extends Employee {
 
   // calculate earnings; override abstract method earnings in Employee
   public double earnings() {
-    if (getNumberOfPieces() <= 0) // no zero work
-      return 0.0;
-    else
-      return getNumberOfPieces() * getWage();
+    return getNumberOfPieces() <= 0 ? 0.0 : getNumberOfPieces() * getWage();
   }
 
   // return String representation of SalariedEmployee object

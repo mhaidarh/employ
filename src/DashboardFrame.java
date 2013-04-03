@@ -2,6 +2,7 @@
  * Part of Employ
  */
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +10,7 @@ import javax.swing.*;
 
 public class DashboardFrame extends CommonFrame implements ActionListener {
 
+  // panels on frame
   JPanel panelInput = new JPanel();
   JPanel panelType = new JPanel();
   JPanel panelButton = new JPanel();
@@ -29,17 +31,26 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JRadioButton eCommission = new JRadioButton("Commission", false);
   JRadioButton eCommissionPlus = new JRadioButton("Commission Plus", false);
 
+  JLabel labelWeeklySalary = new JLabel("Weekly Salary:");
+  JLabel labelWage = new JLabel("Wage:");
+  JLabel labelHours = new JLabel("Hours:");
+  JLabel labelCommissionRate = new JLabel("Commission Rate:");
+  JLabel labelGrossSales = new JLabel("Gross Sales:");
+
+  // output components
   JLabel labelSSNOutput = new JLabel("Registered SSN: ");
   JTextField textSSNOutput = new JTextField(10);
   JLabel labelNameFull = new JLabel("Full Name: ");
   JTextField textNameFull = new JTextField(31);
   JLabel labelTypeOutput = new JLabel("Employee Type: ");
-  JTextField textTypeOutput = new JTextField(15);
+  JTextField textTypeOutput = new JTextField(16);
 
+  // control components
   JButton buttonAddData = new JButton("Add");
   JButton buttonDeleteData = new JButton("Delete");
   JButton buttonClearData = new JButton("Clear");
 
+  // reuse variables
   int ssnInput;
   String warnSSN = "Type SSN (Social Security Number)!";
   String warnName = "Type first name with/without last name!";
@@ -62,10 +73,6 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     eHourly.setActionCommand("typeHourly");
     eCommission.setActionCommand("typeCommission");
     eCommissionPlus.setActionCommand("typeCommissionPlus");
-    eType.add(eSalaried);
-    eType.add(eHourly);
-    eType.add(eCommission);
-    eType.add(eCommissionPlus);
 
     panelInput.setLayout(new BoxLayout(panelInput, BoxLayout.Y_AXIS));
     panelInput.add(labelSSNInput);
@@ -76,6 +83,10 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     panelInput.add(textNameLast);
 
     panelType.setLayout(new BoxLayout(panelType, BoxLayout.Y_AXIS));
+    eType.add(eSalaried);
+    eType.add(eHourly);
+    eType.add(eCommission);
+    eType.add(eCommissionPlus);
     panelType.add(labelType);
     panelType.add(eSalaried);
     panelType.add(eHourly);
@@ -137,14 +148,15 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     textSSNOutput.setText(warnSSN);
   }
 
-  // give warning message in full name output if first or last name is empty
+  // give warning message in full name output if first and/or last name is empty
   void warnNameInput() {
     textNameFull.setText(warnName);
   }
 
-  // define listener action when button is clicked
+  // define listener action when specific button is clicked
   public void actionPerformed(ActionEvent event) {
     if (event.getActionCommand().equals("addData")) {
+      clearOutputAll();
       if (textSSNInput.getText().equals("") || (textNameFirst.getText().equals(""))) {
           if (!textSSNInput.getText().equals("")) {
             warnNameInput();
@@ -162,7 +174,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     } else if (event.getActionCommand().equals("clearData")) {
       clearInputOutputAll();
     } else {
-      textSSNOutput.setText("Use the button!");
+      getContentPane().setBackground(Color.white);
     }
     repaint();
   }
