@@ -26,7 +26,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JTextField textNameLast = new JTextField(15);
 
   JLabel labelType = new JLabel("Employee Type:");
-  ButtonGroup cTypes = new ButtonGroup();
+  ButtonGroupListener cTypes = new ButtonGroupListener();
   String eSalaried = "Salaried";
   String eHourly = "Hourly";
   String eCommission = "Commission";
@@ -71,45 +71,46 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   private String ssnInput;
   private String firstName;
   private String lastName;
+  private String cType;
   private String eType;
   private double eEarnings;
   private String warnSSN = "Type SSN (Social Security Number)!";
   private String warnName = "Type first name with/without last name!";
   private String warnMore = "Type all required additional information!";
 
-  double iSalary = 0;
-  double iWage = 0;
-  double iHours = 0;
-  double iRate = 0;
-  double iSales = 0;
-  double iPieces = 0;
+  double iSalary;
+  double iWage;
+  double iHours;
+  double iRate;
+  double iSales;
+  int iPieces;
 
   // define dashboard for special frame
   public DashboardFrame() {
     super("Dashboard");
 
     // define event action listener
-    cSalaried.setActionCommand("typeSalaried");
-    cHourly.setActionCommand("typeHourly");
-    cCommission.setActionCommand("typeCommission");
-    cCommissionPlus.setActionCommand("typeCommissionPlus");
-    cPieceWorker.setActionCommand("typePieceWorker");
-
     cSalaried.addActionListener(this);
     cHourly.addActionListener(this);
     cCommission.addActionListener(this);
     cCommissionPlus.addActionListener(this);
     cPieceWorker.addActionListener(this);
 
-    buttonAddData.setActionCommand("addData");
-    buttonDeleteData.setActionCommand("deleteData");
-    buttonClearData.setActionCommand("clearData");
-    buttonDisplayData.setActionCommand("displayData");
-    buttonDisplayData.setEnabled(false); // temporary
+    cSalaried.setActionCommand("Salaried");
+    cHourly.setActionCommand("Hourly");
+    cCommission.setActionCommand("Commission");
+    cCommissionPlus.setActionCommand("Commission Plus");
+    cPieceWorker.setActionCommand("Piece Worker");
 
     buttonAddData.addActionListener(this);
     buttonDeleteData.addActionListener(this);
     buttonClearData.addActionListener(this);
+
+    buttonAddData.setActionCommand("addData");
+    buttonDeleteData.setActionCommand("deleteData");
+    buttonClearData.setActionCommand("clearData");
+    buttonDisplayData.setActionCommand("displayData");
+    buttonDisplayData.setEnabled(false); // temporary disabled
 
     // put components on panel
     panelInput.setLayout(new BoxLayout(panelInput, BoxLayout.Y_AXIS));
@@ -146,7 +147,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     panelMore.add(textSales);
     panelMore.add(labelPieces);
     panelMore.add(textPieces);
-    textSalary.setEditable(false);
+    textSalary.setEditable(true);
     textWage.setEditable(false);
     textHours.setEditable(false);
     textRate.setEditable(false);
@@ -209,10 +210,12 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     textNameFull.setText(warnName);
   }
 
+  // give warning message in earnings output if more input is empty
   private void warnMoreInput() {
     textEarningsOutput.setText(warnMore);
   }
 
+  // give all warning message
   private void warnAllInput() {
     warnSSNInput();
     warnNameInput();
@@ -224,6 +227,12 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     textSSNInput.setText("");
     textNameFirst.setText("");
     textNameLast.setText("");
+    textSalary.setText("");
+    textWage.setText("");
+    textHours.setText("");
+    textRate.setText("");
+    textSales.setText("");
+    textPieces.setText("");
   }
 
   // clear all output in text output
@@ -242,65 +251,111 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
 
   // get earnings based on employee type
   private double getEarnings() {
-    if (eType == eSalaried) {
-      // iSalary = Double.parseDouble(textSalary.getText());
-      // SalariedEmployee(first, last, ssn, double salary)
-      Employee thisEmployee = new SalariedEmployee(ssnInput, firstName, lastName, 500);
-      return thisEmployee.earnings();
-    } else if (eType == eHourly) {
-      // iWage = Double.parseDouble(textWage.getText());
-      // iHours = Double.parseDouble(textHours.getText());
-      // HourlyEmployee(first, last, ssn, double hourlyWage, double hoursWorked)
-      Employee thisEmployee = new HourlyEmployee(ssnInput, firstName, lastName, 200, 20);
-      return thisEmployee.earnings();
-    } else if (eType == eCommission) {
-      // iSales = Double.parseDouble(textSales.getText());
-      // iRate = Double.parseDouble(textRate.getText());
-      // CommissionEmployee(first, last, ssn, double sales, double rate)
-      Employee thisEmployee = new CommissionEmployee(ssnInput, firstName, lastName, 10000, 3);
-      return thisEmployee.earnings();
-    } else if (eType == eCommissionPlus) {
-      // iSales = Double.parseDouble(textSales.getText());
-      // iRate = Double.parseDouble(textRate.getText());
-      // iSalary = Double.parseDouble(textSalary.getText());
-      // CommissionPlusEmployee(first, last, ssn, double sales, double rate, double salary)
-      Employee thisEmployee = new CommissionPlusEmployee(ssnInput, firstName, lastName, 6000, 3, 200);
-      return thisEmployee.earnings();
-    } else if (eType == ePieceWorker) {
-      // iPieces = Double.parseDouble(textPieces.getText());
-      // iWage = Double.parseDouble(textWage.getText());
-      // PieceWorker(first, last, ssn, int np, double wp)
-      Employee thisEmployee = new PieceWorker(ssnInput, firstName, lastName, 100, 200);
-      return thisEmployee.earnings();
-    } else {
+    try {
+      if (eType == eSalaried) {
+        iSalary = Double.parseDouble(textSalary.getText());
+        Employee thisEmployee = new SalariedEmployee(ssnInput, firstName, lastName, iSalary);
+        return thisEmployee.earnings();
+      } else if (eType == eHourly) {
+        iWage = Double.parseDouble(textWage.getText());
+        iHours = Double.parseDouble(textHours.getText());
+        Employee thisEmployee = new HourlyEmployee(ssnInput, firstName, lastName, iWage, iHours);
+        return thisEmployee.earnings();
+      } else if (eType == eCommission) {
+        iSales = Double.parseDouble(textSales.getText());
+        iRate = Double.parseDouble(textRate.getText());
+        Employee
+            thisEmployee =
+            new CommissionEmployee(ssnInput, firstName, lastName, iSales, iRate);
+        return thisEmployee.earnings();
+      } else if (eType == eCommissionPlus) {
+        iSales = Double.parseDouble(textSales.getText());
+        iRate = Double.parseDouble(textRate.getText());
+        iSalary = Double.parseDouble(textSalary.getText());
+        Employee thisEmployee =
+            new CommissionPlusEmployee(ssnInput, firstName, lastName, iSales, iRate, iSalary);
+        return thisEmployee.earnings();
+      } else if (eType == ePieceWorker) {
+        iPieces = Integer.parseInt(textPieces.getText());
+        iWage = Double.parseDouble(textWage.getText());
+        Employee thisEmployee = new PieceWorker(ssnInput, firstName, lastName, iPieces, iWage);
+        return thisEmployee.earnings();
+      } else {
+        return 1;
+      }
+    } catch (Exception ex) {
       return 0;
     }
   }
 
+  // reset all additional information text field
+  public void resetMoreEditable() {
+    textSalary.setEditable(false);
+    textWage.setEditable(false);
+    textHours.setEditable(false);
+    textSales.setEditable(false);
+    textRate.setEditable(false);
+    textPieces.setEditable(false);
+  }
+
+  // listen employee type radio button when chosen
+  public void cTypesActionPerformed(ActionEvent event) {
+    if (event.getActionCommand().equals("Salaried")) {
+      resetMoreEditable();
+      textSalary.setEditable(true);
+    } else if (event.getActionCommand().equals("Hourly")) {
+      resetMoreEditable();
+      textWage.setEditable(true);
+      textHours.setEditable(true);
+    } else if (event.getActionCommand().equals("Commission")) {
+      resetMoreEditable();
+      textSales.setEditable(true);
+      textRate.setEditable(true);
+    } else if (event.getActionCommand().equals("Commission Plus")) {
+      resetMoreEditable();
+      textSales.setEditable(true);
+      textRate.setEditable(true);
+      textSalary.setEditable(true);
+    } else if (event.getActionCommand().equals("Piece Worker")) {
+      resetMoreEditable();
+      textPieces.setEditable(true);
+      textWage.setEditable(true);
+    }
+  }
+
   // define listener action when specific button is clicked
-  public void actionPerformed(ActionEvent event) {
+  public void buttonActionPerformed(ActionEvent event) {
     if (event.getActionCommand().equals("addData")) {
       clearOutputAll();
-      if (textSSNInput.getText().equals("") || (textNameFirst.getText().equals(""))) {
-        if (!textNameFirst.getText().equals("")) {
+      ssnInput = textSSNInput.getText();
+      firstName = textNameFirst.getText();
+      eEarnings = getEarnings();
+      if (ssnInput.equals("") || (firstName.equals("")) || eEarnings == 0) {
+        if (!firstName.equals("") && (!ssnInput.equals(""))) {
+          warnMoreInput();
+        } else if ((!firstName.equals("")) && (eEarnings != 0)) {
           warnSSNInput();
-        } else if (!textSSNInput.getText().equals("")) {
+        } else if (!ssnInput.equals("") && (eEarnings != 0)) {
           warnNameInput();
         } else {
-          warnSSNInput();
-          warnNameInput();
+          warnAllInput();
         }
       } else {
         getInputAll();
-        getEarnings();
       }
     } else if (event.getActionCommand().equals("deleteData")) {
       clearOutputAll();
     } else if (event.getActionCommand().equals("clearData")) {
       clearInputOutputAll();
-    } else {
-      clearOutputAll();
     }
+  }
+
+  // call listener when there is an event
+  @Override
+  public void actionPerformed(ActionEvent event) {
+    System.out.println("EmployApp: event: " + event.getActionCommand()); // event logger
+    cTypesActionPerformed(event);
+    buttonActionPerformed(event);
     repaint();
   }
 
