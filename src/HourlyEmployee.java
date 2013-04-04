@@ -1,4 +1,5 @@
 /**
+ * SMTI06, M Haidar Hanif, 54411850
  * Part of Employ
  */
 
@@ -19,7 +20,7 @@ public class HourlyEmployee extends Employee {
 
   // set wage
   public void setWage(double hourlyWage) {
-    wage = (hourlyWage < 0.0) ? 0.0 : hourlyWage;
+    wage = (hourlyWage > 0) ? hourlyWage : 0;
   }
 
   // return wage
@@ -29,8 +30,7 @@ public class HourlyEmployee extends Employee {
 
   // set hours worked
   public void setHours(double hoursWorked) {
-    hours = ((hoursWorked >= 0.0) && (hoursWorked <= 168.0)) ?
-            hoursWorked : 0.0;
+    hours = ((hoursWorked >= 0) && (hoursWorked <= 168)) ? hoursWorked : 0;
   }
 
   // return hours worked
@@ -40,23 +40,14 @@ public class HourlyEmployee extends Employee {
 
   // calculate earnings; override abstract method earnings in Employee
   public double earnings() {
-    return getHours() <= 40 ? getWage() * getHours()
-                            : 40 * getWage() + (getHours() - 40) * getWage() * 1.5;
-  }
-
-  // get payment amount; override abstract method getPaymentAmount in Employee
-  // this acts in the Payable hierarchy as subclass
-  // although it's basically the same with earnings
-  public double getPaymentAmount() {
-    return getHours() <= 40 ? getWage() * getHours()
-                            : 40 * getWage() + (getHours() - 40) * getWage() * 1.5;
+    return getHours() > 40 ? 40 * getWage() + (getHours() - 40) * getWage() * 1.5
+                           : getWage() * getHours();
   }
 
   // return String representation of HourlyEmployee object
   public String toString() {
     return String.format("hourly employee: %s\n%s: $%,.2f; %s: %,.2f",
-                         super.toString(), "hourly wage", getWage(),
-                         "hours worked", getHours());
+                         super.toString(), "hourly wage", getWage(), "hours worked", getHours());
   }
 
 }

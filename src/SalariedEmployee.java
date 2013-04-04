@@ -1,4 +1,5 @@
 /**
+ * SMTI06, M Haidar Hanif, 54411850
  * Part of Employ
  */
 
@@ -17,7 +18,7 @@ public class SalariedEmployee extends Employee {
 
   // set salary
   public void setWeeklySalary(double salary) {
-    weeklySalary = salary < 0.0 ? 0.0 : salary;
+    weeklySalary = salary > 0 ? salary : 0;
   }
 
   // return salary
@@ -27,13 +28,6 @@ public class SalariedEmployee extends Employee {
 
   // calculate earnings; override abstract method earnings in Employee
   public double earnings() {
-    return getWeeklySalary();
-  }
-
-  // get payment amount; override abstract method getPaymentAmount in Employee
-  // this acts in the Payable hierarchy as subclass
-  // although it's basically the same with earnings
-  public double getPaymentAmount() {
     return getWeeklySalary();
   }
 

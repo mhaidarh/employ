@@ -1,4 +1,5 @@
 /**
+ * SMTI06, M Haidar Hanif, 54411850
  * Part of Employ
  */
 
@@ -8,27 +9,28 @@
 public class PieceWorker extends Employee {
 
   private double wage; // wage per piece
-  private double pieces; // number of pieces of merchandise produced
+  private double pieces; // number of pieces (merchandise produced)
 
   public PieceWorker(String first, String last, String ssn,
-                     int npmp, double wp) {
+                     int np, double wp) {
     super(first, last, ssn);
-    setNumberOfPieces(npmp); // validate number of pieces
+    setNumberOfPieces(np); // validate number of pieces
     setWagePerPiece(wp); // validate wage per piece
   }
 
   // set pieces
   public void setNumberOfPieces(int piecesProduced) {
-    pieces = piecesProduced < 0 ? 0 : piecesProduced;
+    pieces = piecesProduced > 0 ? piecesProduced : 0;
   }
 
+  // return pieces
   public double getNumberOfPieces() {
     return pieces;
   }
 
   // set wage
   public void setWagePerPiece(double wagePerPiece) {
-    wage = wagePerPiece < 0 ? 0 : wagePerPiece;
+    wage = wagePerPiece > 0 ? wagePerPiece : 0;
   }
 
   // return wage
@@ -38,20 +40,7 @@ public class PieceWorker extends Employee {
 
   // calculate earnings; override abstract method earnings in Employee
   public double earnings() {
-    if (getNumberOfPieces() <= 0) // no zero work
-      return 0.0;
-    else
-      return getNumberOfPieces() * getWage();
-  }
-
-  // get payment amount; override abstract method getPaymentAmount in Employee
-  // this acts in the Payable hierarchy as subclass
-  // although it's basically the same with earnings
-  public double getPaymentAmount() {
-    if (getNumberOfPieces() <= 0) // no zero work
-      return 0.0;
-    else
-      return getNumberOfPieces() * getWage();
+    return getNumberOfPieces() > 0 ? getNumberOfPieces() * getWage() : 0;
   }
 
   // return String representation of SalariedEmployee object

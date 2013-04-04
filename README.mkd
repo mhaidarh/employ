@@ -1,6 +1,12 @@
 Employ
 ======
 
+### Important Notes
+
+*To* enhance and ensure learning step for actual understanding of GUI application by knowing exactly how the layout of frame, panel, component, and listener works; I personally avoid using GUI builder. Furthermore generated GUI code from the builder is too dirty and often cannot be modified later without its only builder, so coding the GUI by hand is actually a lot better. Because of that, this application is not using any GUI builder at the time then the code became more effective to develop, read, and learn back later. *So* it takes more time to learn the fundamentals before take a further step to SQL database. Others may have finished by using NetBeans IDE's GUI builder and available SQL connection via local setup server, but the code and design may not work outside it and even break in other IDE or even other user & developer with different configuration. Another thing is employee database tables need to be separated by each type. *I* may send an update if this app has implement SQL database with cross compability, including save and load local database file feature to ensure platform independent. (Read more on [Learning Step](#Learning-Step) section.)
+
+To directly execute the application, use `EmployApp.jar` java archive.
+
 ### Identification
 
 ```
@@ -16,14 +22,15 @@ Create: Object-oriented application with SQL-based database
 Book:   Java™ How to Program, Seventh Edition
 Page:   522 [549]
 Task:   10.11-10.12 => Improvement
-Due:    4 April 2013
+Date:   April 2013
 ```
 
 ### Objectives
 
 - GUI application
-- SQL-based application
+- Employee earnings system
 - Employee database
+- SQL-based application
 
 ### Project Structure
 
@@ -34,6 +41,7 @@ employ
 ├── .idea
 ├── .git
 ├── employ.iml
+├── EmployApp.jar
 ├── README.mkd
 ├── LICENSE
 └── .gitignore
@@ -73,31 +81,19 @@ Employee Database System
 
 ```
 SSN = Social Security Number = 8 digits
-First Name    = 20 chars
-Last Name     = 20 chars
-Full Name     = 40 chars
+First Name    = 15 chars
+Last Name     = 15 chars
+Full Name     = 31 chars (with space)
 Employee Type = 16 chars
 ```
 
-```
-Salaried
-weeklySalary = salary <= 0 ? 0 : salary
-earnings = weeklySalary
+Employee Type:
 
-Hourly
-wage = (hourlyWage <= 0) ? 0 : hourlyWage
-hours = ((hoursWorked >= 0) && (hoursWorked <= 168)) ? hoursWorked : 0
-earnings = hours <= 40 ? wage * hours : 40 * wage + (hours - 40) * wage * 1.5
-
-Commission
-commissionRate = (rate >= 0 && rate <= 1) ? rate : 0
-grossSales = (sales <= 0) ? 0 : sales
-earnings = commissionRate * grossSales
-
-CommissionPlus
-baseSalary = (salary <= 0) ? 0 : salary
-earnings = baseSalary + Commission.earnings
-```
+- Salaried
+- Hourly
+- Commission
+- CommissionPlus
+- PieceWorker
 
 ### Table
 
@@ -125,19 +121,18 @@ Manage
 │   └── Employee Type
 └── Delete
     └── SSN
-
 Display
 ├── All
-├── Sorted
-│   ├── Name
-│   └── Employee Type
-└── By SSN
+└── Sorted
+    ├── SSN
+    ├── Name
+    └── Employee Type
 ```
 
 *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
 
-License
--------
+Resource
+--------
 
 Source code released under [MIT License](LICENSE) and available in [GitHub repository](https://github.com/mhaidarh/employ).
 

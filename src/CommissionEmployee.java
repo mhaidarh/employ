@@ -1,5 +1,5 @@
 /**
- * Part of Employ
+ * SMTI06, M Haidar Hanif, 54411850 Part of Employ
  */
 
 // CommissionEmployee class extends Employee.
@@ -19,7 +19,7 @@ public class CommissionEmployee extends Employee {
 
   // set commission rate
   public void setCommissionRate(double rate) {
-    commissionRate = (rate > 0.0 && rate < 1.0) ? rate : 0.0;
+    commissionRate = (rate > 0 && rate <= 100) ? (rate / 100) : 0;
   }
 
   // return commission rate
@@ -29,7 +29,7 @@ public class CommissionEmployee extends Employee {
 
   // set gross sales amount
   public void setGrossSales(double sales) {
-    grossSales = (sales < 0.0) ? 0.0 : sales;
+    grossSales = (sales <= 0) ? 0 : sales;
   }
 
   // return gross sales amount
@@ -39,13 +39,6 @@ public class CommissionEmployee extends Employee {
 
   // calculate earnings; override abstract method earnings in Employee
   public double earnings() {
-    return getCommissionRate() * getGrossSales();
-  }
-
-  // get payment amount; override abstract method getPaymentAmount in Employee
-  // this acts in the Payable hierarchy as subclass
-  // although it's basically the same with earnings
-  public double getPaymentAmount() {
     return getCommissionRate() * getGrossSales();
   }
 

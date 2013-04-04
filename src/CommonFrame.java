@@ -1,4 +1,5 @@
 /**
+ * SMTI06, M Haidar Hanif, 54411850
  * Part of Employ
  */
 
@@ -15,7 +16,7 @@ public abstract class CommonFrame extends JFrame {
   public CommonFrame(String heading) {
     super("Employ - " + heading);
 
-    setSize(300, 400);
+    setSize(400, 500);
     setResizable(false);
     setLocationRelativeTo(null);
     setLayout(new FlowLayout());
@@ -39,4 +40,3 @@ public abstract class CommonFrame extends JFrame {
   }
 
 }
-
