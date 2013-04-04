@@ -9,12 +9,12 @@
 public class PieceWorker extends Employee {
 
   private double wage; // wage per piece
-  private double pieces; // number of pieces of merchandise produced
+  private double pieces; // number of pieces (merchandise produced)
 
   public PieceWorker(String first, String last, String ssn,
-                     int npmp, double wp) {
+                     int np, double wp) {
     super(first, last, ssn);
-    setNumberOfPieces(npmp); // validate number of pieces
+    setNumberOfPieces(np); // validate number of pieces
     setWagePerPiece(wp); // validate wage per piece
   }
 
