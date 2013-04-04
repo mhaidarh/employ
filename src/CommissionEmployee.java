@@ -1,6 +1,5 @@
 /**
- * SMTI06, M Haidar Hanif, 54411850
- * Part of Employ
+ * SMTI06, M Haidar Hanif, 54411850 Part of Employ
  */
 
 // CommissionEmployee class extends Employee.
@@ -20,7 +19,7 @@ public class CommissionEmployee extends Employee {
 
   // set commission rate
   public void setCommissionRate(double rate) {
-    commissionRate = (rate > 0 && rate <= 100) ? rate : 0;
+    commissionRate = (rate > 0 && rate <= 100) ? (rate / 100) : 0;
   }
 
   // return commission rate

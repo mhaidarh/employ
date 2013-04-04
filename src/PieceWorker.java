@@ -20,7 +20,7 @@ public class PieceWorker extends Employee {
 
   // set pieces
   public void setNumberOfPieces(int piecesProduced) {
-    pieces = piecesProduced <= 0 ? 0 : piecesProduced;
+    pieces = piecesProduced > 0 ? piecesProduced : 0;
   }
 
   // return pieces
@@ -30,7 +30,7 @@ public class PieceWorker extends Employee {
 
   // set wage
   public void setWagePerPiece(double wagePerPiece) {
-    wage = wagePerPiece < 0 ? 0 : wagePerPiece;
+    wage = wagePerPiece > 0 ? wagePerPiece : 0;
   }
 
   // return wage
@@ -40,7 +40,7 @@ public class PieceWorker extends Employee {
 
   // calculate earnings; override abstract method earnings in Employee
   public double earnings() {
-    return getNumberOfPieces() <= 0 ? 0 : getNumberOfPieces() * getWage();
+    return getNumberOfPieces() > 0 ? getNumberOfPieces() * getWage() : 0;
   }
 
   // return String representation of SalariedEmployee object

@@ -46,6 +46,12 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JLabel labelPieces = new JLabel("Pieces Produced (>0):");
   JTextField textPieces = new JTextField();
 
+  // control components
+  JButton buttonAddData = new JButton("Add");
+  JButton buttonDeleteData = new JButton("Delete");
+  JButton buttonClearData = new JButton("Clear");
+  JButton buttonDisplayData = new JButton("Display");
+
   // output components
   JLabel labelSSNOutput = new JLabel("Registered SSN: ");
   JTextField textSSNOutput = new JTextField(10);
@@ -53,12 +59,8 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JTextField textNameFull = new JTextField(31);
   JLabel labelTypeOutput = new JLabel("Employee Type: ");
   JTextField textTypeOutput = new JTextField(16);
-
-  // control components
-  JButton buttonAddData = new JButton("Add");
-  JButton buttonDeleteData = new JButton("Delete");
-  JButton buttonClearData = new JButton("Clear");
-  JButton buttonDisplayData = new JButton("Display");
+  JLabel labelEarningsOutput = new JLabel("Salary ($): ");
+  JTextField textEarningsOutput = new JTextField(31);
 
   // reuse variables
   int ssnInput;
@@ -137,9 +139,12 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     panelOutput.add(textNameFull);
     panelOutput.add(labelTypeOutput);
     panelOutput.add(textTypeOutput);
+    panelOutput.add(labelEarningsOutput);
+    panelOutput.add(textEarningsOutput);
     textSSNOutput.setEditable(false);
     textNameFull.setEditable(false);
     textTypeOutput.setEditable(false);
+    textEarningsOutput.setEditable(false);
 
     // put panels on frame
     add(panelInput);
@@ -152,14 +157,15 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   // get number input in text input
   // also define exception if input is not number
   void getInputAll() {
-    String numberInputString = textSSNInput.getText();
+    String ssnInput = textSSNInput.getText();
     try {
-      ssnInput = Integer.parseInt(numberInputString);
-      textSSNOutput.setText(ssnInput + "");
+      this.ssnInput = Integer.parseInt(ssnInput);
+      textSSNOutput.setText(this.ssnInput + "");
       textNameFull.setText(textNameFirst.getText() + " " + textNameLast.getText());
       textTypeOutput.setText(getSelectedButtonText(eType));
     } catch (Exception ex) {
-      textSSNOutput.setText(warnSSN);
+      warnSSNInput();
+      warnNameInput();
     }
   }
 
@@ -190,21 +196,27 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     textNameFull.setText(warnName);
   }
 
+  // get earnings based on employee type
+  double getEarnings() {
+    return 0;
+  }
+
   // define listener action when specific button is clicked
   public void actionPerformed(ActionEvent event) {
     if (event.getActionCommand().equals("addData")) {
       clearOutputAll();
       if (textSSNInput.getText().equals("") || (textNameFirst.getText().equals(""))) {
-          if (!textSSNInput.getText().equals("")) {
-            warnNameInput();
-          } else if (!textNameFirst.getText().equals("")) {
+          if (!textNameFirst.getText().equals("")) {
             warnSSNInput();
+          } else if (!textSSNInput.getText().equals("")) {
+            warnNameInput();
           } else {
             warnSSNInput();
             warnNameInput();
           }
         } else {
           getInputAll();
+          getEarnings();
         }
     } else if (event.getActionCommand().equals("deleteData")) {
       clearOutputAll();

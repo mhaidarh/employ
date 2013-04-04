@@ -19,7 +19,7 @@ public class CommissionPlusEmployee extends CommissionEmployee {
 
   // set base salary
   public void setBaseSalary(double salary) {
-    baseSalary = (salary <= 0) ? 0 : salary; // non-negative
+    baseSalary = (salary > 0) ? salary : 0; // non-negative
   }
 
   // return base salary
