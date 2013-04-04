@@ -26,7 +26,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   JTextField textNameLast = new JTextField(15);
 
   JLabel labelType = new JLabel("Employee Type:");
-  ButtonGroup cTypes = new ButtonGroup();
+  ButtonGroupListener cTypes = new ButtonGroupListener();
   String eSalaried = "Salaried";
   String eHourly = "Hourly";
   String eCommission = "Commission";
@@ -71,6 +71,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
   private String ssnInput;
   private String firstName;
   private String lastName;
+  private String cType;
   private String eType;
   private double eEarnings;
   private String warnSSN = "Type SSN (Social Security Number)!";
@@ -89,27 +90,27 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     super("Dashboard");
 
     // define event action listener
-    cSalaried.setActionCommand("typeSalaried");
-    cHourly.setActionCommand("typeHourly");
-    cCommission.setActionCommand("typeCommission");
-    cCommissionPlus.setActionCommand("typeCommissionPlus");
-    cPieceWorker.setActionCommand("typePieceWorker");
-
     cSalaried.addActionListener(this);
     cHourly.addActionListener(this);
     cCommission.addActionListener(this);
     cCommissionPlus.addActionListener(this);
     cPieceWorker.addActionListener(this);
 
-    buttonAddData.setActionCommand("addData");
-    buttonDeleteData.setActionCommand("deleteData");
-    buttonClearData.setActionCommand("clearData");
-    buttonDisplayData.setActionCommand("displayData");
-    buttonDisplayData.setEnabled(false); // temporary
+    cSalaried.setActionCommand("Salaried");
+    cHourly.setActionCommand("Hourly");
+    cCommission.setActionCommand("Commission");
+    cCommissionPlus.setActionCommand("Commission Plus");
+    cPieceWorker.setActionCommand("Piece Worker");
 
     buttonAddData.addActionListener(this);
     buttonDeleteData.addActionListener(this);
     buttonClearData.addActionListener(this);
+
+    buttonAddData.setActionCommand("addData");
+    buttonDeleteData.setActionCommand("deleteData");
+    buttonClearData.setActionCommand("clearData");
+    buttonDisplayData.setActionCommand("displayData");
+    buttonDisplayData.setEnabled(false); // temporary disabled
 
     // put components on panel
     panelInput.setLayout(new BoxLayout(panelInput, BoxLayout.Y_AXIS));
@@ -287,8 +288,43 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     }
   }
 
+  // reset all additional information text field
+  public void resetMoreEditable() {
+    textSalary.setEditable(false);
+    textWage.setEditable(false);
+    textHours.setEditable(false);
+    textSales.setEditable(false);
+    textRate.setEditable(false);
+    textPieces.setEditable(false);
+  }
+
+  // listen employee type radio button when chosen
+  public void cTypesActionPerformed(ActionEvent event) {
+    if (event.getActionCommand().equals("Salaried")) {
+      resetMoreEditable();
+      textSalary.setEditable(true);
+    } else if (event.getActionCommand().equals("Hourly")) {
+      resetMoreEditable();
+      textWage.setEditable(true);
+      textHours.setEditable(true);
+    } else if (event.getActionCommand().equals("Commission")) {
+      resetMoreEditable();
+      textSales.setEditable(true);
+      textRate.setEditable(true);
+    } else if (event.getActionCommand().equals("Commission Plus")) {
+      resetMoreEditable();
+      textSales.setEditable(true);
+      textRate.setEditable(true);
+      textSalary.setEditable(true);
+    } else if (event.getActionCommand().equals("Piece Worker")) {
+      resetMoreEditable();
+      textPieces.setEditable(true);
+      textWage.setEditable(true);
+    }
+  }
+
   // define listener action when specific button is clicked
-  public void actionPerformed(ActionEvent event) {
+  public void buttonActionPerformed(ActionEvent event) {
     if (event.getActionCommand().equals("addData")) {
       clearOutputAll();
       ssnInput = textSSNInput.getText();
@@ -311,9 +347,15 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
       clearOutputAll();
     } else if (event.getActionCommand().equals("clearData")) {
       clearInputOutputAll();
-    } else {
-      clearOutputAll();
     }
+  }
+
+  // call listener when there is an event
+  @Override
+  public void actionPerformed(ActionEvent event) {
+    System.out.println("EmployApp: event: " + event.getActionCommand()); // event logger
+    cTypesActionPerformed(event);
+    buttonActionPerformed(event);
     repaint();
   }
 

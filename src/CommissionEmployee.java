@@ -19,7 +19,13 @@ public class CommissionEmployee extends Employee {
 
   // set commission rate
   public void setCommissionRate(double rate) {
-    commissionRate = (rate > 0 && rate <= 100) ? (rate / 100) : 0;
+    if (rate > 0 && rate <= 100) {
+      commissionRate = (rate / 100);
+    } else if (rate > 100) {
+      commissionRate = 1;
+    } else {
+      commissionRate = 0;
+    }
   }
 
   // return commission rate

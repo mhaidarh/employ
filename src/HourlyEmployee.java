@@ -30,7 +30,13 @@ public class HourlyEmployee extends Employee {
 
   // set hours worked
   public void setHours(double hoursWorked) {
-    hours = ((hoursWorked >= 0) && (hoursWorked <= 168)) ? hoursWorked : 0;
+    if ((hoursWorked > 0) && (hoursWorked <= 168)) {
+      hours = hoursWorked;
+    } else if (hoursWorked > 168) {
+      hours = 168;
+    } else {
+      hours = 0;
+    }
   }
 
   // return hours worked
