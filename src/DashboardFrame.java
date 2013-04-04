@@ -1,4 +1,5 @@
 /**
+ * SMTI06, M Haidar Hanif, 54411850
  * Part of Employ
  */
 
@@ -83,6 +84,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     eCommission.setActionCommand("typeCommission");
     eCommissionPlus.setActionCommand("typeCommissionPlus");
 
+    // put components on panel
     panelInput.setLayout(new BoxLayout(panelInput, BoxLayout.Y_AXIS));
     panelInput.add(labelSSNInput);
     panelInput.add(textSSNInput);
@@ -139,6 +141,7 @@ public class DashboardFrame extends CommonFrame implements ActionListener {
     textNameFull.setEditable(false);
     textTypeOutput.setEditable(false);
 
+    // put panels on frame
     add(panelInput);
     add(panelType);
     add(panelMore);

@@ -1,4 +1,5 @@
 /**
+ * SMTI06, M Haidar Hanif, 54411850
  * Part of Employ
  */
 
@@ -43,8 +44,7 @@ public class PayrollSystemTest {
     employees[3] = commissionPlusEmployee;
     employees[4] = pieceWorker;
 
-    System.out.println("Employees processed polymorphically:\n");
-
+    // employees processed polymorphically
     // generically process each element in array employees
     for (Employee currentEmployee : employees) {
       System.out.println(currentEmployee); // invokes toString
@@ -61,15 +61,7 @@ public class PayrollSystemTest {
             "new base salary with 10%% increase is: $%,.2f\n",
             employee.getBaseSalary());
       }
-
-      System.out.printf(
-          "earned $%,.2f\n\n", currentEmployee.earnings());
-    }
-
-    // get type name of each object in employees array
-    for (int j = 0; j < employees.length; j++) {
-      System.out.printf("Employee %d is a %s\n", j,
-                        employees[j].getClass().getName());
+      // display earnings
     }
 
   }
